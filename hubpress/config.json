@@ -4,7 +4,12 @@
     "repositoryName": "ovo-6.github.io",
     "branch": "master"
   },
+  "site": {
+    "title": "ovo6 blog",
+    "description": "my own blog"
+  },
+  "socialnetwork": {},
   "theme": {
-    "name": "Casper"
+    "name": "casper"
   }
 }
