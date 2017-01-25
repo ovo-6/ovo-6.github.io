@@ -1,0 +1,7 @@
+= Spring Boot
+
+[source,java]
+----
+public class Person {
+}
+----
