@@ -11,12 +11,15 @@ Spring Boot is framework that makes it super easy to setup and run a java spring
 This concept is called *Convention over Configuration*.
 Of course these defaults can be easily re-configured.
 
-On top of that we get:
-
- * Embedded Tomcat (or other) server to easily run our web app - as easily as `java -jar app.jar`
+On top of that we get embedded Tomcat (or other) server to easily run our web app - as easily as `java -jar app.jar` or `mvn spring-boot:run`.
 
 TODO:
 benefits in production
+
+.TODO drawbacks
+* some overrides of default functionality may be complicated
+* having many overrides of default behaviour would mean Spring Boot is not needed - nothing to autoconfigure
+* fat jars?
 
 
 == Setup
@@ -67,7 +70,7 @@ public class QuestionController {
     }
 }
 ----
-When application starts it will start immediately serving this REST API with embedded Tomcat in this address:
+When application starts it will start immediately serving this REST API with embedded Tomcat at this address:
 [source,java]
 ----
 http://localhost:8080/questions/12
@@ -82,3 +85,6 @@ Usually we need some persistence so we can add dependency on Spring Data and JPA
    <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
 ----
+Now we create our model with JPA annotations as usual. All these `@Entity`, `@Id`, `@ManyToOne`, `@OneToMany`, ...
+
+We also have included Spring Data by this dependency so we can start using it with all features it provides.  
