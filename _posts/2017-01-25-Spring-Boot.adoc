@@ -103,10 +103,11 @@ public class QuestionController {
     Question getQuestion(@PathVariable Integer id) {
         return repo.findOne(id);
     }
-
 }
 ----
 
+== Conclusion
+For quick development java application using Spring, for creating POCs, anywhere you need quick start this is great framework.
 
 TODO:
 benefits in production
