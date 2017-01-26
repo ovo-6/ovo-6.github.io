@@ -46,7 +46,7 @@ public class Application {
 ----
 Now Spring Boot is setup and your application would start.
 
-=== 3. Set other dependencies in POM
+=== 3. Add web dependency in POM
 If our application will use web we can add dependency on Spring MVC:
 [source,xml]
 ----
@@ -55,7 +55,26 @@ If our application will use web we can add dependency on Spring MVC:
    <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
 ----
-If we need persistence we can add dependency on Spring Data and JPA:
+And then you can create right away Controller e.g. `@RestController` with `@RequestMapping` methods to create REST API:
+[source,java]
+----
+@RestController
+public class QuestionController {
+
+    @RequestMapping("/questions/{id}")
+    Question getQuestion(@PathVariable Integer id) {
+        return new Question(id);
+    }
+}
+----
+When application starts it will start immediately serving this REST API with embedded Tomcat in this address:
+[source,java]
+----
+http://localhost:8080/questions/12
+----
+
+=== 4. Add persistence dependency in POM
+Usually we need some persistence so we can add dependency on Spring Data and JPA:
 [source,xml]
 ----
 <dependency>
