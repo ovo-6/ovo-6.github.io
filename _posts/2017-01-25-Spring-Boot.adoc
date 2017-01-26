@@ -39,12 +39,12 @@ You can either use in any class `@EnableAutoConfiguration` annotation for Spring
 ----
 @SpringBootApplication
 public class Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 }
 ----
+Now Spring Boot is setup and your application would start.
 
 === 3. Set other dependencies in POM
 If our application will use web we can add dependency on Spring MVC:
