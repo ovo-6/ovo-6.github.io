@@ -13,15 +13,6 @@ Of course these defaults can be easily re-configured.
 
 On top of that we get embedded Tomcat (or other) server to easily run our web app - as easily as `java -jar app.jar` or `mvn spring-boot:run`.
 
-TODO:
-benefits in production
-
-.TODO drawbacks
-* some overrides of default functionality may be complicated
-* having many overrides of default behaviour would mean Spring Boot is not needed - nothing to autoconfigure
-* fat jars?
-
-
 == Setup
 To setup Spring Boot in our application using maven we need these steps:
 
@@ -34,6 +25,7 @@ To setup Spring Boot in our application using maven we need these steps:
     <version>1.4.3.RELEASE</version>
 </parent>
 ----
+From now on you can use everything from Spring Core e.g `@Autowired`.
 
 === 2. Add entrypoint
 Now for Spring Boot to setup all configurations for all dependencies use application entry point with `@SpringBootApplication` annotation:
@@ -87,4 +79,42 @@ Usually we need some persistence so we can add dependency on Spring Data and JPA
 ----
 Now we create our model with JPA annotations as usual. All these `@Entity`, `@Id`, `@ManyToOne`, `@OneToMany`, ...
 
-We also have included Spring Data by this dependency so we can start using it with all features it provides.  
+We also have included Spring Data by this dependency so we can start using it with all features it provides. We can create reporitory only by providing this interface:
+[source,java]
+----
+public interface QuestionRepository extends JpaRepository<Question, Integer> {}
+----
+Yes that's right no methods, no implementation, everything will be setup by Spring Data library. We would just autowire it and start using it:
+[source,java]
+----
+@RestController
+public class QuestionController {
+
+    @Autowired
+    QuestionRepository repo;
+
+    @RequestMapping("/questions")
+    @JsonView(QuestionListView.class)
+    List<Question> getAll() {
+        return repo.findAll();
+    }
+
+    @RequestMapping("/questions/{id}")
+    Question getQuestion(@PathVariable Integer id) {
+        return repo.findOne(id);
+    }
+
+}
+----
+
+
+TODO:
+benefits in production
+
+.TODO drawbacks
+* some overrides of default functionality may be complicated
+* having many overrides of default behaviour would mean Spring Boot is not needed - nothing to autoconfigure
+* fat jars?
+
+
+TODO: link to github example project.
