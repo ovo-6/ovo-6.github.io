@@ -6,7 +6,8 @@
   },
   "site": {
     "title": "ovo6 blog",
-    "description": "my own blog"
+    "description": "my own blog",
+    "disqus": "ovo6"
   },
   "socialnetwork": {},
   "theme": {
