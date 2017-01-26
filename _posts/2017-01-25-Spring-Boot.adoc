@@ -5,8 +5,7 @@ Spring Boot is framework that makes it super easy to setup and run a java spring
 
 [square]
 * Application Configuration
-* JPA implementation - Hibernate
-* Transaction Management
+* JPA implementation - Hibernate including transaction management, ... etc.
 * Tempating engine
 * ... and more
 
@@ -16,6 +15,41 @@ Of course these defaults can be easily re-configured.
 On top of that we get:
 [square]
 * Embedded Tomcat (or other) server to easily run our web app - as easily as `java -jar app.jar`
+
+TODO:
+benefits in production
+
+
+== Setup
+To setup Spring Boot in our application using maven we need these steps:
+
+=== 1. Setup parent POM
+[source,xml]
+----
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.4.3.RELEASE</version>
+</parent>
+----
+
+=== 2. Set other dependencies in POM
+If our application will use web we can add dependency on Spring MVC:
+[source,xml]
+----
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+----
+If we need persistence we can add dependency on Spring Data and JPA:
+[source,xml]
+----
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+----
 
 
 [source,java]
