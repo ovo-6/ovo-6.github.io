@@ -11,7 +11,7 @@ Spring Boot is framework that makes it super easy to setup and run a java spring
 This concept is called *Convention over Configuration*.
 Of course these defaults can be easily re-configured.
 
-On top of that we get embedded Tomcat (or other) server to easily run our web app - as easily as `java -jar app.jar` or `mvn spring-boot:run`.
+On top of that we get embedded Tomcat (or other) server to easily run our web app - as easily as `java -jar app.jar` or `mvn spring-boot:run`. Also there are some options for monitoring in production.
 
 == Setup
 To setup Spring Boot in our application using maven we need these steps:
@@ -105,17 +105,13 @@ public class QuestionController {
     }
 }
 ----
+Last step is to add maven dependency to our DB driver and provide datasource properties for connection to DB.
+
+And that's all, we have working persistence with minimal effort.
+
+Whole application code is available at gihub: https://github.com/ovo-6/samples/tree/master/poll-spring-boot-react
 
 == Conclusion
 For quick development java application using Spring, for creating POCs, anywhere you need quick start this is great framework.
 
-TODO:
-benefits in production
-
-.TODO drawbacks
-* some overrides of default functionality may be complicated
-* having many overrides of default behaviour would mean Spring Boot is not needed - nothing to autoconfigure
-* fat jars?
-
-
-TODO: link to github example project.
+Questions is whether it is still usable for more complicated projects where we want to override large number of parts. 
