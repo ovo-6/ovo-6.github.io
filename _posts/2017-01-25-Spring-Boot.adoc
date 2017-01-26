@@ -33,7 +33,7 @@ To setup Spring Boot in our application using maven we need these steps:
 ----
 
 === 2. Add entrypoint
-You can either use in any class `@EnableAutoConfiguration` annotation for Spring Boot to setup all configurations for all dependencies or use application entry point with `@SpringBootApplication` annotation:
+Now for Spring Boot to setup all configurations for all dependencies use application entry point with `@SpringBootApplication` annotation:
 
 [source,java]
 ----
