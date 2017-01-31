@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 26 Jan 2017 14:59:27 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Spring Boot]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 31 Jan 2017 07:40:01 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Spring Boot]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Spring Boot is framework that makes it super easy to setup and run a java spring application. It makes all neccessary configurations by using default implementations for all parts of application:</p>
@@ -175,4 +175,4 @@ public class QuestionController {
 <p>Questions is whether it is still usable for more complicated projects where we want to override large number of parts.</p>
 </div>
 </div>
-</div>]]></description><link>https://ovo-6.github.io/2017/01/25/Spring-Boot.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/01/25/Spring-Boot.html</guid><category><![CDATA[java]]></category><category><![CDATA[ spring boot]]></category><pubDate>Wed, 25 Jan 2017 00:00:00 GMT</pubDate></item></channel></rss>
+</div>]]></description><link>https://ovo-6.github.io/2017/01/25/Spring-Boot.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/01/25/Spring-Boot.html</guid><category><![CDATA[java]]></category><category><![CDATA[ spring]]></category><category><![CDATA[ spring boot]]></category><pubDate>Wed, 25 Jan 2017 00:00:00 GMT</pubDate></item></channel></rss>
