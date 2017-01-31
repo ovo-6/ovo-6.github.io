@@ -1,2 +1,33 @@
 = Spring Data
+:hp-tags: java, spring, spring data
 
+Spring Data is library that simplifies work with data storage. I'll focus on JPA repository features.
+
+== Adding to project
+When using Spring Boot we can simply add dependency on Spring Data and JPA:
+[source,xml]
+----
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+----
+
+== Dynamic query derivation from repository method names
+When we create repository that extends from `JpaRepository` or `CrudRepository` (non JPA) we inherit all the basic operations.
+Beside that we can create method in this interface and based on method name Spring Data framework will generate JPA query.
+
+Take this example:
+
+[source,java]
+----
+public interface AnswerRepository extends JpaRepository<Answer, Integer> {
+
+    List<Answer> findByQuestion(Question question);
+}
+----
+Framework identifies `findBy{Fieldname}` method using camel-case and creates automatically query
+
+== Implementation domain base classes providing basic properties
+
+== Support for transparent auditing (created, last changed)
