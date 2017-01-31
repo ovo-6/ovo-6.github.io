@@ -1,5 +1,5 @@
 = Spring Boot
-:hp-tags: java, spring boot
+:hp-tags: java, spring, spring boot
 
 Spring Boot is framework that makes it super easy to setup and run a java spring application. It makes all neccessary configurations by using default implementations for all parts of application: 
 
