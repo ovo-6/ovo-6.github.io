@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Feb 2017 21:54:34 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Feb 2017 21:57:54 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.</p>
@@ -15,20 +15,20 @@
 <div class="content">
 <pre class="highlight"><code class="language-go" data-lang="go">package main
 
-import ( <i class="conum" data-value="1"></i><b>(1)</b>
+import (
     "fmt"
     "net/http"
     "encoding/json"
 )
 
-type User struct { <i class="conum" data-value="2"></i><b>(2)</b>
+type User struct {
     Id int
     Name string
     Email string
-    password string <i class="conum" data-value="3"></i><b>(3)</b>
+    password string // first char lowercase -&gt; not visible from outside
 }
 
-var users [3]User <i class="conum" data-value="4"></i><b>(4)</b>
+var users [3]User // global variable - array with 3 users
 
 func handler(w http.ResponseWriter, r *http.Request) {
     b, _ := json.Marshal(users)
@@ -36,46 +36,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"} <i class="conum" data-value="5"></i><b>(5)</b>
+    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"}
     users[1] = User{2, "mike", "mike@gmail.com", "xyz"}
     users[2] = User{3, "frank", "frank@email.com", "xyz"}
 
-    http.HandleFunc("/users", handler) <i class="conum" data-value="6"></i><b>(6)</b>
-    http.ListenAndServe(":8086", nil) <i class="conum" data-value="7"></i><b>(7)</b>
+    http.HandleFunc("/users", handler) // assign function `handler` to serve requests for `/users`
+    http.ListenAndServe(":8086", nil) // start server on port 8086
 }</code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>importing needed libraries</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>we create custom type "User"</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>first char lowercase &#8594; not visible from outside</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>global variable - array with 3 users</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>create instances of Users</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>assign function <code>handler</code> to serve requests for <code>/users</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>start server on port 8086</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>When we save this to file named <code>main.go</code> and run it by command <code>go run main.go</code> it will start serving requests.</p>
