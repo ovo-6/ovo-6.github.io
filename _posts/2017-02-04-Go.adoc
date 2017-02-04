@@ -60,3 +60,4 @@ After one day of playing with Go it looks promising with some nice language feat
 
 == References
 * Official Pages - https://golang.org/
+* Source of this example - https://github.com/ovo-6/samples/blob/master/go/src/gowiki/users.go
