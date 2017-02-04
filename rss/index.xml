@@ -1,4 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 31 Jan 2017 07:40:01 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Spring Boot]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Feb 2017 21:54:34 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_program">Example Program</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s go straight to the business and create some service providing list of users as json:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-go" data-lang="go">package main
+
+import ( <i class="conum" data-value="1"></i><b>(1)</b>
+    "fmt"
+    "net/http"
+    "encoding/json"
+)
+
+type User struct { <i class="conum" data-value="2"></i><b>(2)</b>
+    Id int
+    Name string
+    Email string
+    password string <i class="conum" data-value="3"></i><b>(3)</b>
+}
+
+var users [3]User <i class="conum" data-value="4"></i><b>(4)</b>
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    b, _ := json.Marshal(users)
+    fmt.Fprintf(w, string(b))
+}
+
+func main() {
+    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"} <i class="conum" data-value="5"></i><b>(5)</b>
+    users[1] = User{2, "mike", "mike@gmail.com", "xyz"}
+    users[2] = User{3, "frank", "frank@email.com", "xyz"}
+
+    http.HandleFunc("/users", handler) <i class="conum" data-value="6"></i><b>(6)</b>
+    http.ListenAndServe(":8086", nil) <i class="conum" data-value="7"></i><b>(7)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>importing needed libraries</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>we create custom type "User"</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>first char lowercase &#8594; not visible from outside</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>global variable - array with 3 users</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>create instances of Users</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>assign function <code>handler</code> to serve requests for <code>/users</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>start server on port 8086</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When we save this to file named <code>main.go</code> and run it by command <code>go run main.go</code> it will start serving requests.</p>
+</div>
+<div class="paragraph">
+<p>Now we can simply go to <code><a href="http://localhost:8086/users" class="bare">http://localhost:8086/users</a></code> and we should see our arrays of users serialized to json:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>[{"Id":1,"Name":"joe","Email":"joe@yahoo.com"},{"Id":2,"Name":"mike","Email":"mike@gmail.com"},{"Id":3,"Name":"frank","Email":"frank@email.com"}]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_go_feaures">Go Feaures</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>statically typed language - compiler can check types (like in Java)</p>
+</li>
+<li>
+<p>go routines - simple way how to provide concurrency</p>
+</li>
+<li>
+<p>functions can return multiple values</p>
+</li>
+<li>
+<p>array slices - we don&#8217;t work with whole arrays but only subparts called slices</p>
+</li>
+<li>
+<p><code>go test</code> - run all tests - functions starting with <code>Test</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After one day of playing with Go it looks promising with some nice language features. Question is whether user comunity will create enough libraries since the language is still quite new. Also it would be nice to measure performance between Go and let say Java microservice if learning new language is worth it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Official Pages - <a href="https://golang.org/" class="bare">https://golang.org/</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>]]></description><link>https://ovo-6.github.io/2017/02/04/Go.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/02/04/Go.html</guid><category><![CDATA[go]]></category><category><![CDATA[ golang]]></category><pubDate>Sat, 04 Feb 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Spring Boot]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Spring Boot is framework that makes it super easy to setup and run a java spring application. It makes all neccessary configurations by using default implementations for all parts of application:</p>
