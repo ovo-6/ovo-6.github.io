@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Go - ovo6 blog</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Go">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Go">
+    <meta property="og:description" content="">
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link rel="stylesheet" type="text/css" href="//ovo-6.github.io/themes/uno/assets/css/uno.css?v=1486245274341" />
+
+    <link rel="canonical" href="https://ovo-6.github.io/2017/02/04/Go.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="ovo6 blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Go" />
+    <meta property="og:description" content="Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers. Example Program Let&amp;#8217;s go straight to the business and create some service providing list of users as json:" />
+    <meta property="og:url" content="https://ovo-6.github.io/2017/02/04/Go.html" />
+    <meta property="article:tag" content="go" />
+    <meta property="article:tag" content=" golang" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Go" />
+    <meta name="twitter:description" content="Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers. Example Program Let&amp;#8217;s go straight to the business and create some service providing list of users as json:" />
+    <meta name="twitter:url" content="https://ovo-6.github.io/2017/02/04/Go.html" />
+    
+    <script type="application/ld+json">
+null
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="ovo6 blog" href="https://ovo-6.github.io/rss/" />
+
+</head>
+<body class="post-template tag-go tag-golang no-js">
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    <header class="panel-cover panel-cover--collapsed " >
+      <div class="panel-main">
+    
+        <div class="panel-main__inner panel-inverted">
+        <div class="panel-main__content">
+    
+            <h1 class="panel-cover__title panel-title"><a href="https://ovo-6.github.io" title="link to homepage for ovo6 blog">ovo6 blog</a></h1>
+            <hr class="panel-cover__divider" />
+            <p class="panel-cover__description">my own blog</p>
+            <hr class="panel-cover__divider panel-cover__divider--secondary" />
+    
+            <div class="navigation-wrapper">
+    
+              <nav class="cover-navigation cover-navigation--primary">
+                <ul class="navigation">
+                  <li class="navigation__item"><a href="https://ovo-6.github.io/#blog" title="link to ovo6 blog blog" class="blog-button">Blog</a></li>
+                </ul>
+              </nav>
+    
+              
+              
+              <nav class="cover-navigation navigation--social">
+                <ul class="navigation">
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+                </ul>
+              </nav>
+              
+    
+            </div>
+    
+          </div>
+    
+        </div>
+    
+        <div class="panel-cover--overlay"></div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            
+
+  <article class="post-container post-container--single">
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime="04 Feb 2017" class="post-meta__date date">04 Feb 2017</time> &#8226; <span class="post-meta__tags tags">on <a href="https://ovo-6.github.io/tag/go/">go</a>, <a href="https://ovo-6.github.io/tag/golang/"> golang</a></span>
+        <span class="post-meta__author author"><img src="https://avatars.githubusercontent.com/u/10128927?v&#x3D;3" alt="profile image for ovo-6" class="avatar post-meta__avatar" /> by ovo-6</span>
+      </div>
+      <h1 class="post-title">Go</h1>
+    </header>
+
+    <section class="post tag-go tag-golang">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_program">Example Program</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s go straight to the business and create some service providing list of users as json:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-go" data-lang="go">package main
+
+import ( <i class="conum" data-value="1"></i><b>(1)</b>
+    "fmt"
+    "net/http"
+    "encoding/json"
+)
+
+type User struct { <i class="conum" data-value="2"></i><b>(2)</b>
+    Id int
+    Name string
+    Email string
+    password string <i class="conum" data-value="3"></i><b>(3)</b>
+}
+
+var users [3]User <i class="conum" data-value="4"></i><b>(4)</b>
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    b, _ := json.Marshal(users)
+    fmt.Fprintf(w, string(b))
+}
+
+func main() {
+    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"} <i class="conum" data-value="5"></i><b>(5)</b>
+    users[1] = User{2, "mike", "mike@gmail.com", "xyz"}
+    users[2] = User{3, "frank", "frank@email.com", "xyz"}
+
+    http.HandleFunc("/users", handler) <i class="conum" data-value="6"></i><b>(6)</b>
+    http.ListenAndServe(":8086", nil) <i class="conum" data-value="7"></i><b>(7)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>importing needed libraries</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>we create custom type "User"</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>first char lowercase &#8594; not visible from outside</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>global variable - array with 3 users</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>create instances of Users</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>assign function <code>handler</code> to serve requests for <code>/users</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>start server on port 8086</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When we save this to file named <code>main.go</code> and run it by command <code>go run main.go</code> it will start serving requests.</p>
+</div>
+<div class="paragraph">
+<p>Now we can simply go to <code><a href="http://localhost:8086/users" class="bare">http://localhost:8086/users</a></code> and we should see our arrays of users serialized to json:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>[{"Id":1,"Name":"joe","Email":"joe@yahoo.com"},{"Id":2,"Name":"mike","Email":"mike@gmail.com"},{"Id":3,"Name":"frank","Email":"frank@email.com"}]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_go_feaures">Go Feaures</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>statically typed language - compiler can check types (like in Java)</p>
+</li>
+<li>
+<p>go routines - simple way how to provide concurrency</p>
+</li>
+<li>
+<p>functions can return multiple values</p>
+</li>
+<li>
+<p>array slices - we don&#8217;t work with whole arrays but only subparts called slices</p>
+</li>
+<li>
+<p><code>go test</code> - run all tests - functions starting with <code>Test</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After one day of playing with Go it looks promising with some nice language features. Question is whether user comunity will create enough libraries since the language is still quite new. Also it would be nice to measure performance between Go and let say Java microservice if learning new language is worth it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Official Pages - <a href="https://golang.org/" class="bare">https://golang.org/</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+    </section>
+
+  </article>
+
+  
+  <section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'ovo6'; // required: replace example with your forum shortname
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+  
+
+
+
+            <footer class="footer">
+                <span class="footer__copyright">&copy; 2017. All rights reserved.</span>
+                <span class="footer__copyright"><a href="http://uno.daleanthony.com" title="link to page for Uno Ghost theme">Uno theme</a> by <a href="http://daleanthony.com" title="link to website for Dale-Anthony">Dale-Anthony</a></span>
+                <span class="footer__copyright">Proudly published with <a href="http://hubpress.io" title="link to Hubpress website">Hubpress</a></span>
+            </footer>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    <script type="text/javascript" src="//ovo-6.github.io/themes/uno/assets/js/main.js?v=1486245274341"></script>
+    
+
+</body>
+</html>
