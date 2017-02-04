@@ -31,26 +31,39 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"}
+    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"} // <5>
     users[1] = User{2, "mike", "mike@gmail.com", "xyz"}
     users[2] = User{3, "frank", "frank@email.com", "xyz"}
 
-    http.HandleFunc("/users", handler)
-    http.ListenAndServe(":8086", nil)
+    http.HandleFunc("/users", handler) // <6>
+    http.ListenAndServe(":8086", nil) // <7>
 }
 ----
 <1> importing needed libraries
 <2> we create custom type "User"
 <3> first char lowercase -> not visible from outside
 <4> global variable - array with 3 users
+<5> create instances of Users
+<6> assign function `handler` to serve requests for `/users`
+<7> start server on port 8086
 
 When we save this to file named `main.go` and run it by command `go run main.go` it will start serving requests.
 
 Now we can simply go to `http://localhost:8086/users` and we should see our arrays of users serialized to json:
- [{"Id":1,"Name":"joe","Email":"joe@yahoo.com"},{"Id":2,"Name":"mike","Email":"mike@gmail.com"},{"Id":3,"Name":"frank","Email":"frank@email.com"}]
+[source]
+----
+[{"Id":1,"Name":"joe","Email":"joe@yahoo.com"},{"Id":2,"Name":"mike","Email":"mike@gmail.com"},{"Id":3,"Name":"frank","Email":"frank@email.com"}]
+----
  
 == Go Feaures
+* statically typed language - compiler can check types (like in Java)
 * go routines - simple way how to provide concurrency
+* functions can return multiple values
 * array slices - we don't work with whole arrays but only subparts called slices
+* `go test` - run all tests - functions starting with `Test`
+
+== Conclusion
+After one day of playing with Go it looks promising with some nice language features. Question is whether user comunity will create enough libraries since the language is still quite new. Also it would be nice to measure performance between Go and let say Java microservice if learning new language is worth it.
 
 == References
+* Official Pages - https://golang.org/
