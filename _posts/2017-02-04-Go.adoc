@@ -10,20 +10,20 @@ Let's go straight to the business and create some service providing list of user
 ----
 package main
 
-import ( // <1>
+import (
     "fmt"
     "net/http"
     "encoding/json"
 )
 
-type User struct { // <2>
+type User struct {
     Id int
     Name string
     Email string
-    password string // <3>
+    password string // first char lowercase -> not visible from outside
 }
 
-var users [3]User // <4>
+var users [3]User // global variable - array with 3 users
 
 func handler(w http.ResponseWriter, r *http.Request) {
     b, _ := json.Marshal(users)
@@ -31,21 +31,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"} // <5>
+    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"}
     users[1] = User{2, "mike", "mike@gmail.com", "xyz"}
     users[2] = User{3, "frank", "frank@email.com", "xyz"}
 
-    http.HandleFunc("/users", handler) // <6>
-    http.ListenAndServe(":8086", nil) // <7>
+    http.HandleFunc("/users", handler) // assign function `handler` to serve requests for `/users`
+    http.ListenAndServe(":8086", nil) // start server on port 8086
 }
 ----
-<1> importing needed libraries
-<2> we create custom type "User"
-<3> first char lowercase -> not visible from outside
-<4> global variable - array with 3 users
-<5> create instances of Users
-<6> assign function `handler` to serve requests for `/users`
-<7> start server on port 8086
 
 When we save this to file named `main.go` and run it by command `go run main.go` it will start serving requests.
 
