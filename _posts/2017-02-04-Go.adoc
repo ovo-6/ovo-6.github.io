@@ -1,6 +1,10 @@
 = Go
+:hp-tags: go, golang
+
 Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.
-Let's go straignt to the business and 
+
+== Example Program
+Let's go straight to the business and create some service providing list of users as json:
 
 [source,go]
 ----
@@ -44,5 +48,9 @@ When we save this to file named `main.go` and run it by command `go run main.go`
 
 Now we can simply go to `http://localhost:8086/users` and we should see our arrays of users serialized to json:
  [{"Id":1,"Name":"joe","Email":"joe@yahoo.com"},{"Id":2,"Name":"mike","Email":"mike@gmail.com"},{"Id":3,"Name":"frank","Email":"frank@email.com"}]
+ 
+== Go Feaures
+* go routines - simple way how to provide concurrency
+* array slices - we don't work with whole arrays but only subparts called slices
 
 == References
