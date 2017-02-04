@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Feb 2017 21:57:54 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Feb 2017 22:02:58 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.</p>
@@ -97,6 +97,9 @@ func main() {
 <ul>
 <li>
 <p>Official Pages - <a href="https://golang.org/" class="bare">https://golang.org/</a></p>
+</li>
+<li>
+<p>Source of this example - <a href="https://github.com/ovo-6/samples/blob/master/go/src/gowiki/users.go" class="bare">https://github.com/ovo-6/samples/blob/master/go/src/gowiki/users.go</a></p>
 </li>
 </ul>
 </div>
