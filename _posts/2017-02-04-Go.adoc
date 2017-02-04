@@ -1,0 +1,48 @@
+= Go
+Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.
+Let's go straignt to the business and 
+
+[source,go]
+----
+package main
+
+import ( // <1>
+    "fmt"
+    "net/http"
+    "encoding/json"
+)
+
+type User struct { // <2>
+    Id int
+    Name string
+    Email string
+    password string // <3>
+}
+
+var users [3]User // <4>
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    b, _ := json.Marshal(users)
+    fmt.Fprintf(w, string(b))
+}
+
+func main() {
+    users[0] = User{1, "joe", "joe@yahoo.com", "xyz"}
+    users[1] = User{2, "mike", "mike@gmail.com", "xyz"}
+    users[2] = User{3, "frank", "frank@email.com", "xyz"}
+
+    http.HandleFunc("/users", handler)
+    http.ListenAndServe(":8086", nil)
+}
+----
+<1> importing needed libraries
+<2> we create custom type "User"
+<3> first char lowercase -> not visible from outside
+<4> global variable - array with 3 users
+
+When we save this to file named `main.go` and run it by command `go run main.go` it will start serving requests.
+
+Now we can simply go to `http://localhost:8086/users` and we should see our arrays of users serialized to json:
+ [{"Id":1,"Name":"joe","Email":"joe@yahoo.com"},{"Id":2,"Name":"mike","Email":"mike@gmail.com"},{"Id":3,"Name":"frank","Email":"frank@email.com"}]
+
+== References
