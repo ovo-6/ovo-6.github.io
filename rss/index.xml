@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 04 Feb 2017 22:02:58 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Feb 2017 10:01:31 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.</p>
@@ -104,7 +104,92 @@ func main() {
 </ul>
 </div>
 </div>
-</div>]]></description><link>https://ovo-6.github.io/2017/02/04/Go.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/02/04/Go.html</guid><category><![CDATA[go]]></category><category><![CDATA[ golang]]></category><pubDate>Sat, 04 Feb 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Spring Boot]]></title><description><![CDATA[<div id="preamble">
+</div>]]></description><link>https://ovo-6.github.io/2017/02/04/Go.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/02/04/Go.html</guid><category><![CDATA[go]]></category><category><![CDATA[ golang]]></category><pubDate>Sat, 04 Feb 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Spring Data]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Data is library that simplifies work with data storage. I&#8217;ll focus on JPA repository features.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_to_project">Adding to project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When using Spring Boot we can simply add dependency on Spring Data and JPA:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dynamic_query_derivation_from_repository_method_names">Dynamic query derivation from repository method names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When we create repository that extends from <code>JpaRepository</code> or <code>CrudRepository</code> (non JPA) we inherit all the basic operations for creating, updating and deleting.
+Beside that we can create method in this interface and based on method name Spring Data framework will generate JPA query.</p>
+</div>
+<div class="paragraph">
+<p>Take this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface AnswerRepository extends JpaRepository&lt;Answer, Integer&gt; {
+
+    List&lt;Answer&gt; findByQuestion(Question question);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Framework identifies <code>findBy{Fieldname}</code> method using camel-case and creates automatically implementation for this interface method.
+It will generate something like this HQL query <code>SELECT * from Answer join Question q where q.id = :questionId</code>, where <code>questionId</code> is taken from input parameter as <code>question.getId()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Also it provides features like sorting and paging out of the box. You only add additional parameter <code>Pageable</code> or <code>Sort</code> in your method signature.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    List&lt;Answer&gt; findByQuestion(Question question, Pageable pageable);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can filter by multiple fields, do ingore-case search and other stuff as described in <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html">documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_support_for_transparent_auditing_created_last_changed">Support for transparent auditing (created, last changed)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To enable auditing you just add this one annotation to your config class <code>@EnableJpaAuditing</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then you can annotate field by one of <code>@CreatedBy</code>, <code>@LastModifiedBy</code> to capture the user who created or modified the entity
+or use <code>@CreatedDate</code> or <code>@LastModifiedDate</code> to capture the point in time this happened.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Documentation - <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html" class="bare">https://docs.spring.io/spring-data/jpa/docs/current/reference/html</a></p>
+</li>
+<li>
+<p>Sample Implementation - <a href="https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/src/com/ovo6/poll/repo/AnswerRepository.java" class="bare">https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/src/com/ovo6/poll/repo/AnswerRepository.java</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>]]></description><link>https://ovo-6.github.io/2017/01/31/Spring-Data.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/01/31/Spring-Data.html</guid><category><![CDATA[java]]></category><category><![CDATA[ spring]]></category><category><![CDATA[ spring data]]></category><pubDate>Tue, 31 Jan 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Spring Boot]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Spring Boot is framework that makes it super easy to setup and run a java spring application. It makes all neccessary configurations by using default implementations for all parts of application:</p>
