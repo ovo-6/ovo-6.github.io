@@ -39,8 +39,12 @@ Also it provides features like sorting and paging out of the box. You only add a
 You can filter by multiple fields, do ingore-case search and other stuff as described in https://docs.spring.io/spring-data/jpa/docs/current/reference/html[documentation].
 
 == Support for transparent auditing (created, last changed)
-You can annotate field by one of `@CreatedBy`, `@LastModifiedBy` to capture the user who created or modified the entity
+To enable auditing you just add this one annotation to your config class `@EnableJpaAuditing`.
+
+Then you can annotate field by one of `@CreatedBy`, `@LastModifiedBy` to capture the user who created or modified the entity
 or use `@CreatedDate` or `@LastModifiedDate` to capture the point in time this happened.
+
+
 
 == References
 * Documentation - https://docs.spring.io/spring-data/jpa/docs/current/reference/html
