@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Spring Data - ovo6 blog</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Spring Data">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Spring Data">
+    <meta property="og:description" content="">
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link rel="stylesheet" type="text/css" href="//ovo-6.github.io/themes/uno/assets/css/uno.css?v=1486634491899" />
+
+    <link rel="canonical" href="https://ovo-6.github.io/2017/01/31/Spring-Data.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="ovo6 blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Spring Data" />
+    <meta property="og:description" content="Spring Data is library that simplifies work with data storage. I&amp;#8217;ll focus on JPA repository features. Adding to project When using Spring Boot we can simply add dependency on Spring Data and JPA: &amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;" />
+    <meta property="og:url" content="https://ovo-6.github.io/2017/01/31/Spring-Data.html" />
+    <meta property="article:tag" content="java" />
+    <meta property="article:tag" content=" spring" />
+    <meta property="article:tag" content=" spring data" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Spring Data" />
+    <meta name="twitter:description" content="Spring Data is library that simplifies work with data storage. I&amp;#8217;ll focus on JPA repository features. Adding to project When using Spring Boot we can simply add dependency on Spring Data and JPA: &amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;" />
+    <meta name="twitter:url" content="https://ovo-6.github.io/2017/01/31/Spring-Data.html" />
+    
+    <script type="application/ld+json">
+null
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="ovo6 blog" href="https://ovo-6.github.io/rss/" />
+
+</head>
+<body class="post-template tag-java tag-spring tag-spring-data no-js">
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    <header class="panel-cover panel-cover--collapsed " >
+      <div class="panel-main">
+    
+        <div class="panel-main__inner panel-inverted">
+        <div class="panel-main__content">
+    
+            <h1 class="panel-cover__title panel-title"><a href="https://ovo-6.github.io" title="link to homepage for ovo6 blog">ovo6 blog</a></h1>
+            <hr class="panel-cover__divider" />
+            <p class="panel-cover__description">my own blog</p>
+            <hr class="panel-cover__divider panel-cover__divider--secondary" />
+    
+            <div class="navigation-wrapper">
+    
+              <nav class="cover-navigation cover-navigation--primary">
+                <ul class="navigation">
+                  <li class="navigation__item"><a href="https://ovo-6.github.io/#blog" title="link to ovo6 blog blog" class="blog-button">Blog</a></li>
+                </ul>
+              </nav>
+    
+              
+              
+              <nav class="cover-navigation navigation--social">
+                <ul class="navigation">
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+                </ul>
+              </nav>
+              
+    
+            </div>
+    
+          </div>
+    
+        </div>
+    
+        <div class="panel-cover--overlay"></div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            
+
+  <article class="post-container post-container--single">
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime="31 Jan 2017" class="post-meta__date date">31 Jan 2017</time> &#8226; <span class="post-meta__tags tags">on <a href="https://ovo-6.github.io/tag/java/">java</a>, <a href="https://ovo-6.github.io/tag/spring/"> spring</a>, <a href="https://ovo-6.github.io/tag/spring-data/"> spring data</a></span>
+        <span class="post-meta__author author"><img src="https://avatars.githubusercontent.com/u/10128927?v&#x3D;3" alt="profile image for ovo-6" class="avatar post-meta__avatar" /> by ovo-6</span>
+      </div>
+      <h1 class="post-title">Spring Data</h1>
+    </header>
+
+    <section class="post tag-java tag-spring tag-spring-data">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Data is library that simplifies work with data storage. I&#8217;ll focus on JPA repository features.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_to_project">Adding to project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When using Spring Boot we can simply add dependency on Spring Data and JPA:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dynamic_query_derivation_from_repository_method_names">Dynamic query derivation from repository method names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When we create repository that extends from <code>JpaRepository</code> or <code>CrudRepository</code> (non JPA) we inherit all the basic operations for creating, updating and deleting.
+Beside that we can create method in this interface and based on method name Spring Data framework will generate JPA query.</p>
+</div>
+<div class="paragraph">
+<p>Take this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface AnswerRepository extends JpaRepository&lt;Answer, Integer&gt; {
+
+    List&lt;Answer&gt; findByQuestion(Question question);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Framework identifies <code>findBy{Fieldname}</code> method using camel-case and creates automatically implementation for this interface method.
+It will generate something like this HQL query <code>SELECT * from Answer join Question q where q.id = :questionId</code>, where <code>questionId</code> is taken from input parameter as <code>question.getId()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Also it provides features like sorting and paging out of the box. You only add additional parameter <code>Pageable</code> or <code>Sort</code> in your method signature.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    List&lt;Answer&gt; findByQuestion(Question question, Pageable pageable);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can filter by multiple fields, do ingore-case search and other stuff as described in <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html">documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_support_for_transparent_auditing_created_last_changed">Support for transparent auditing (created, last changed)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To enable auditing you just add this one annotation to your config class <code>@EnableJpaAuditing</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then you can annotate field by one of <code>@CreatedBy</code>, <code>@LastModifiedBy</code> to capture the user who created or modified the entity
+or use <code>@CreatedDate</code> or <code>@LastModifiedDate</code> to capture the point in time this happened.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Documentation - <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html" class="bare">https://docs.spring.io/spring-data/jpa/docs/current/reference/html</a></p>
+</li>
+<li>
+<p>Sample Implementation - <a href="https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/src/com/ovo6/poll/repo/AnswerRepository.java" class="bare">https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/src/com/ovo6/poll/repo/AnswerRepository.java</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+    </section>
+
+  </article>
+
+  
+  <section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'ovo6'; // required: replace example with your forum shortname
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+  
+
+
+
+            <footer class="footer">
+                <span class="footer__copyright">&copy; 2017. All rights reserved.</span>
+                <span class="footer__copyright"><a href="http://uno.daleanthony.com" title="link to page for Uno Ghost theme">Uno theme</a> by <a href="http://daleanthony.com" title="link to website for Dale-Anthony">Dale-Anthony</a></span>
+                <span class="footer__copyright">Proudly published with <a href="http://hubpress.io" title="link to Hubpress website">Hubpress</a></span>
+            </footer>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    <script type="text/javascript" src="//ovo-6.github.io/themes/uno/assets/js/main.js?v=1486634491899"></script>
+    
+
+</body>
+</html>
