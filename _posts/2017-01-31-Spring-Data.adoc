@@ -48,3 +48,4 @@ or use `@CreatedDate` or `@LastModifiedDate` to capture the point in time this h
 
 == References
 * Documentation - https://docs.spring.io/spring-data/jpa/docs/current/reference/html
+* Sample Implementation - https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/src/com/ovo6/poll/repo/AnswerRepository.java
