@@ -29,15 +29,14 @@ public interface AnswerRepository extends JpaRepository<Answer, Integer> {
 Framework identifies `findBy{Fieldname}` method using camel-case and creates automatically implementation for this interface method.
 It will generate something like this HQL query `SELECT * from Answer join Question q where q.id = :questionId`, where `questionId` is taken from input parameter as `question.getId()`.
 
-You can filter by multiple fields, do ingore-case search and other stuff as described in http://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/repositories.html[documentation].
-
 Also it provides features like sorting and paging out of the box. You only add additional parameter `Pageable` or `Sort` in your method signature.
 [source,java]
-
-
+----
     List<Answer> findByQuestion(Question question, Pageable pageable);
 }
 ----
+
+You can filter by multiple fields, do ingore-case search and other stuff as described in http://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/repositories.html[documentation].
 
 == Implementation domain base classes providing basic properties
 
