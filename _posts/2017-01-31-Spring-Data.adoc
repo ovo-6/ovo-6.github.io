@@ -36,11 +36,11 @@ Also it provides features like sorting and paging out of the box. You only add a
 }
 ----
 
-You can filter by multiple fields, do ingore-case search and other stuff as described in http://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/repositories.html[documentation].
-
-== Implementation domain base classes providing basic properties
+You can filter by multiple fields, do ingore-case search and other stuff as described in https://docs.spring.io/spring-data/jpa/docs/current/reference/html[documentation].
 
 == Support for transparent auditing (created, last changed)
+You can annotate field by one of `@CreatedBy`, `@LastModifiedBy` to capture the user who created or modified the entity
+or use `@CreatedDate` or `@LastModifiedDate` to capture the point in time this happened.
 
 == References
-* Documentation - http://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/repositories.html
+* Documentation - https://docs.spring.io/spring-data/jpa/docs/current/reference/html
