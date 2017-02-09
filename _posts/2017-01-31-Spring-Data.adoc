@@ -14,7 +14,7 @@ When using Spring Boot we can simply add dependency on Spring Data and JPA:
 ----
 
 == Dynamic query derivation from repository method names
-When we create repository that extends from `JpaRepository` or `CrudRepository` (non JPA) we inherit all the basic operations.
+When we create repository that extends from `JpaRepository` or `CrudRepository` (non JPA) we inherit all the basic operations for creating, updating and deleting.
 Beside that we can create method in this interface and based on method name Spring Data framework will generate JPA query.
 
 Take this example:
@@ -26,7 +26,17 @@ public interface AnswerRepository extends JpaRepository<Answer, Integer> {
     List<Answer> findByQuestion(Question question);
 }
 ----
-Framework identifies `findBy{Fieldname}` method using camel-case and creates automatically query
+Framework identifies `findBy{Fieldname}` method using camel-case and creates automatically implementation for this interface method.
+It will generate something like this HQL query `SELECT * from Answer join Question q where q.id = :questionId `, where `questionId` is taken from input parameter like `question.getId()`.
+
+Also it provides features like sorting and paging out of the box. You only add additional parameter `Pageable` or `Sort` in your method signature.
+[source,java]
+----
+public interface AnswerRepository extends JpaRepository<Answer, Integer> {
+
+    List<Answer> findByQuestion(Question question, Pageable pageable);
+}
+----
 
 == Implementation domain base classes providing basic properties
 
