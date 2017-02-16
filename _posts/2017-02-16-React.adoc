@@ -1,0 +1,56 @@
+= React
+:hp-tags: ui, react
+
+React is library from Facebook that enables building component based UI. From the https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller[MVC] it represents View only. The name may suggest it has something to do with http://www.reactivemanifesto.org/[reactive programming] but it has nothing to do with it.
+
+== Example Program
+
+Simplest way to get started is to link javascript libraries directly in html page.
+[source,html]
+----
+<script src="https://unpkg.com/react@15.3.0/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.3.0/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+----
+
+Then in our page we'll have some div element to which we will render our react application.
+
+[source,html]
+----
+<body>
+   <div id="content"></div>
+</body>    
+----
+
+Now we create main react component called `App`.
+
+[source,babel]
+----
+class App extends React.Component {
+       
+       constructor(props) {
+            super(props);
+            this.state = {questions: []};
+        }
+
+        render() {
+            return (
+            	<Questions data={this.state.questions}/>
+            )
+        }
+    }
+----
+
+The most important is `render()` method that returns result of rendering of our component. It is in JSX language which some kind of combination of HTML and javascript. This code returns another React component called `Questions` and it has some input data passed into it. In this case we don't have any data, we didn't implement fetching yet. 
+
+When we have our main component we can render it to our div  wth id = "content".
+
+[source,babel]
+----
+ReactDOM.render(
+   <App />,
+   document.getElementById('content')
+);
+----
+
+Of course we would have to implement also `Questions` component, but you can see the concept of composing components in React. You can see full implementation of `Questions` in git repo of https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html[sample application]. 
