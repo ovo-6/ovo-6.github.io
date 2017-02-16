@@ -53,4 +53,9 @@ ReactDOM.render(
 );
 ----
 
-Of course we would have to implement also `Questions` component, but you can see the concept of composing components in React. You can see full implementation of `Questions` in git repo of https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html[sample application]. 
+Of course we would have to implement also `Questions` component, but you can see the concept of composing components in React. You can see full implementation of `Questions` in git repo of https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html[sample application].
+
+== Binding data
+To actually populating data into React component is not in the scope of this library. We can do it in many ways, usually by using other libraries like Redux or Flux or we can fetch it simply by jQuery ajax call. I'll do it by jQuery and maybe in some other article I'll dive in the other ways.
+
+TODO
