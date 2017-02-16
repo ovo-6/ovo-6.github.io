@@ -58,4 +58,39 @@ Of course we would have to implement also `Questions` component, but you can see
 == Binding data
 To actually populating data into React component is not in the scope of this library. We can do it in many ways, usually by using other libraries like Redux or Flux or we can fetch it simply by jQuery ajax call. I'll do it by jQuery and maybe in some other article I'll dive in the other ways.
 
-TODO
+So I'll enhance `App` class with method `loadQuestions()` that will be called upon mounting component:
+
+[source,babel]
+----
+class App extends React.Component {
+       
+       constructor(props) {
+            super(props);
+            this.state = {questions: []};
+        }
+        
+        loadQuestions() {
+            var self = this;
+            $.ajax({
+                url: "/questions"
+            }).then(function (data) {
+                self.setState({questions: data});
+            });
+        }
+
+        componentDidMount() {
+            this.loadQuestions();
+		}
+
+        render() {
+            return (
+            	<Questions data={this.state.questions}/>
+            )
+        }
+    }
+----
+
+The method will use jQuery ajax call to `/questions` rest endpoint returning json data and the result is then saved to internal state of component under `questions` key. Later this is passed in `render()` method to `Questions` react component, that should know how to handle this data.
+
+== Conclusion
+This library enables creating loosely coupled reusable UI components. It's not clear how contracts work between components though. Disadvantage is that you need to employ other library to get data populated to react components.
