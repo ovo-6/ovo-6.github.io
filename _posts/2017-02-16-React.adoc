@@ -56,7 +56,7 @@ ReactDOM.render(
 Of course we would have to implement also `Questions` component, but you can see the concept of composing components in React. You can see full implementation of `Questions` in git repo of https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html[sample application].
 
 == Binding data
-To actually populating data into React component is not in the scope of this library. We can do it in many ways, usually by using other libraries like Redux or Flux or we can fetch it simply by jQuery ajax call. I'll do it by jQuery and maybe in some other article I'll dive in the other ways.
+Actually populating data into React component is not in the scope of this library. We can do it in many ways, usually by using other libraries like Redux or Flux or we can fetch it simply by jQuery ajax call. I'll do it by jQuery and maybe in some other article I'll dive in the other ways.
 
 So I'll enhance `App` class with method `loadQuestions()` that will be called upon mounting component:
 
@@ -80,7 +80,7 @@ class App extends React.Component {
 
         componentDidMount() {
             this.loadQuestions();
-		}
+        }
 
         render() {
             return (
@@ -94,3 +94,7 @@ The method will use jQuery ajax call to `/questions` rest endpoint returning jso
 
 == Conclusion
 This library enables creating loosely coupled reusable UI components. It's not clear how contracts work between components though. Disadvantage is that you need to employ other library to get data populated to react components.
+
+== Resources
+* Sample application - https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html
+* React Offical Documentation - https://facebook.github.io/react/
