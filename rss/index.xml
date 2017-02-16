@@ -1,4 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Feb 2017 10:01:31 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 16 Feb 2017 13:42:53 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[React]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>React is library from Facebook that enables building component based UI. From the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> it represents View only. The name may suggest it has something to do with <a href="http://www.reactivemanifesto.org/">reactive programming</a> but it has nothing to do with it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_program">Example Program</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Simplest way to get started is to link javascript libraries directly in html page.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;script src="https://unpkg.com/react@15.3.0/dist/react.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/react-dom@15.3.0/dist/react-dom.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"&gt;&lt;/script&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then in our page we&#8217;ll have some div element to which we will render our react application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;body&gt;
+   &lt;div id="content"&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we create main react component called <code>App</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-babel" data-lang="babel">class App extends React.Component {
+
+       constructor(props) {
+            super(props);
+            this.state = {questions: []};
+        }
+
+        render() {
+            return (
+            	&lt;Questions data={this.state.questions}/&gt;
+            )
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most important is <code>render()</code> method that returns result of rendering of our component. It is in JSX language which some kind of combination of HTML and javascript. This code returns another React component called <code>Questions</code> and it has some input data passed into it. In this case we don&#8217;t have any data, we didn&#8217;t implement fetching yet.</p>
+</div>
+<div class="paragraph">
+<p>When we have our main component we can render it to our div  wth id = "content".</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-babel" data-lang="babel">ReactDOM.render(
+   &lt;App /&gt;,
+   document.getElementById('content')
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Of course we would have to implement also <code>Questions</code> component, but you can see the concept of composing components in React. You can see full implementation of <code>Questions</code> in git repo of <a href="https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html">sample application</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_binding_data">Binding data</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Actually populating data into React component is not in the scope of this library. We can do it in many ways, usually by using other libraries like Redux or Flux or we can fetch it simply by jQuery ajax call. I&#8217;ll do it by jQuery and maybe in some other article I&#8217;ll dive in the other ways.</p>
+</div>
+<div class="paragraph">
+<p>So I&#8217;ll enhance <code>App</code> class with method <code>loadQuestions()</code> that will be called upon mounting component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-babel" data-lang="babel">class App extends React.Component {
+
+       constructor(props) {
+            super(props);
+            this.state = {questions: []};
+        }
+
+        loadQuestions() {
+            var self = this;
+            $.ajax({
+                url: "/questions"
+            }).then(function (data) {
+                self.setState({questions: data});
+            });
+        }
+
+        componentDidMount() {
+            this.loadQuestions();
+        }
+
+        render() {
+            return (
+            	&lt;Questions data={this.state.questions}/&gt;
+            )
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method will use jQuery ajax call to <code>/questions</code> rest endpoint returning json data and the result is then saved to internal state of component under <code>questions</code> key. Later this is passed in <code>render()</code> method to <code>Questions</code> react component, that should know how to handle this data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This library enables creating loosely coupled reusable UI components. It&#8217;s not clear how contracts work between components though. Disadvantage is that you need to employ other library to get data populated to react components.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resources">Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Sample application - <a href="https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html" class="bare">https://github.com/ovo-6/samples/blob/master/poll-spring-boot-react/resources/static/index.html</a></p>
+</li>
+<li>
+<p>React Offical Documentation - <a href="https://facebook.github.io/react/" class="bare">https://facebook.github.io/react/</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>]]></description><link>https://ovo-6.github.io/2017/02/16/React.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/02/16/React.html</guid><category><![CDATA[ui]]></category><category><![CDATA[ react]]></category><pubDate>Thu, 16 Feb 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Go]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Go is new programming language created by Google. Because it runs fast and creates small single executable files with all dependencies inside it is ideal for microservices in docker containers.</p>
