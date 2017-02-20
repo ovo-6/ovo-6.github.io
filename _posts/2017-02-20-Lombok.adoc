@@ -25,8 +25,7 @@ One of great annotations to reduce boilerplate is to reduce null checks in every
 We can do it like this with lombok:
 [source,java]
 ----
-public class Person {
-    
+public class Person {    
     private String name;    
 
     public void setFirstNameLastName(@NonNull  String firstName, @NonNull String lastName ) {
@@ -45,9 +44,45 @@ We don't have to mess with null checks. Code can be clean and we reduce possibil
 TODO - other options
 
 == @Data and related
+When we annotate class with `@Data` annotation it effectively adds other lombok annotations:  `@Getter`, `@Setter`, `@ToString`, `@EqualsAndHashCode` and `@RequiredArgsConstructor`.
+Basically it enables you to write java classes with fields only and getters and setters for all fields, `toString()`, `equals()` and `hashCode()` methods are automatically generated.
+
+Consider this class:
+[source,java]
+----
+@Data
+public class Person {
+    private final Long id;
+    private String name;
+    private Person manager;    
+}
+----
+Due to `@RequiredArgsConstructor` all `final` fields are part of constructor so you will crate instance with `id` argument like this:
+[source,java]
+----
+Person joe = new Person(456L);
+----
+Then we have setters for `name` and `manager` fields:
+[source,java]
+----
+joe.setName("joe");
+joe.setManager(manager);
+System.out.println(joe);
+----
+
+And finally we have `toString()` that will produce by default this output:
+[source,txt]
+----
+Person(id=456, name=joe, manager=Person(id=123, name=boss, manager=null))
+----
+
+Also we have implementation of `equals()` and `hashCode()` using all fields.
+
+If we are not happy what fields got included into previously mentioned generated methods lombok has configuration options to exclude unwanted fields and further control behaviour.
 
 
 == @Builder
+
 
 
 == Logging
