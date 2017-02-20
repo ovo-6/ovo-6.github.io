@@ -40,7 +40,7 @@ Now when we call the method with some of arguments `null` it will throw runtime 
 Exception in thread "main" java.lang.NullPointerException: firstName
 at com.ovo.domain.Person.setFirstNameLastName(Person.java:13)
 ----
-
+We don't have to mess with null checks. Code can be clean and we reduce possibility to introduce bug in out null checks.
 
 TODO - other options
 
