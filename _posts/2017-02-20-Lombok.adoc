@@ -100,6 +100,7 @@ Team team = Team.builder().name("A Team").member(new Person(1L)).member(new Pers
 There is one special annotation - `@Singular` that enables adding entries to collection by subsequent calls to the same method. Nice :)
 
 == Logging
+Lombok also provides shorthand annotations for defining static loggers in class by family of annotations `@Log`, `@Slf4j` and others depending on logging implementation to be used. The benefit there is not so huge but it lets you to replace one line with another and you don't have to worry about how exacly is static logger created.
 
 == Conclusion
 Lombok is nice library and it is worth using even when you use only one annotation from it. 
