@@ -9,7 +9,9 @@
     "description": "my own blog",
     "disqus": "ovo6"
   },
-  "socialnetwork": {},
+  "socialnetwork": {
+    "twitter": "ovo6"
+  },
   "theme": {
     "name": "uno"
   }
