@@ -1,0 +1,61 @@
+= Lombok
+:hp-tags: java, lombok
+
+There are not many java libraries that would elegantly solve some major shortcomings of java programs, but https://projectlombok.org[project lombok] is one of them.
+
+It provides set of useful annotations solving different set of problems but common theme is to reduce https://en.wikipedia.org/wiki/Boilerplate_code[boiler plate code].
+
+== Setup
+We need to add maven dependency:
+[source,html]
+----
+<dependency>
+   <groupId>org.projectlombok</groupId>
+   <artifactId>lombok</artifactId>
+   <version>1.16.12</version>
+</dependency>
+----
+Also if we use features that are adding new methods to objects we need to install IDE plugin, in my case for https://plugins.jetbrains.com/idea/plugin/6317-lombok-plugin[IDEA].
+
+Now we can use of benefits new lombok annotations it provides.
+
+== @NotNull
+One of great annotations to reduce boilerplate is to reduce null checks in every method that requires input that is not null.
+
+We can do it like this with lombok:
+[source,java]
+----
+public class Person {
+    
+    private String name;    
+
+    public void setFirstNameLastName(@NonNull  String firstName, @NonNull String lastName ) {
+        this.name = firstName + " " + lastName;
+    }
+}
+----
+Now when we call the method with some of arguments `null` it will throw runtime exception with argument name:
+[source,txt]
+----
+Exception in thread "main" java.lang.NullPointerException: firstName
+at com.ovo.domain.Person.setFirstNameLastName(Person.java:13)
+----
+
+
+TODO - other options
+
+== @Data and related
+
+
+== @Builder
+
+
+== Logging
+
+== Conclusion
+Lombok is nice library and it is worth using even when you use only one annotation from it. 
+
+== References
+* Offical pages - https://projectlombok.org
+* Sample app showing usage - https://github.com/ovo-6/samples/tree/master/lombok
+* IntelliJ IDEA plugin - https://plugins.jetbrains.com/idea/plugin/6317-lombok-plugin
