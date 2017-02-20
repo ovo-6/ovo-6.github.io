@@ -1,4 +1,190 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 20 Feb 2017 12:18:29 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[React]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 20 Feb 2017 14:24:55 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Lombok]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are not many java libraries that would elegantly solve some major shortcomings of java programs, but <a href="https://projectlombok.org">project lombok</a> is one of them.</p>
+</div>
+<div class="paragraph">
+<p>It provides set of useful annotations solving different set of problems but common theme is to reduce <a href="https://en.wikipedia.org/wiki/Boilerplate_code">boiler plate code</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup">Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We need to add maven dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;dependency&gt;
+   &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+   &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+   &lt;version&gt;1.16.12&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also if we use features that are adding new methods to objects we need to install IDE plugin, in my case for <a href="https://plugins.jetbrains.com/idea/plugin/6317-lombok-plugin">IDEA</a>.</p>
+</div>
+<div class="paragraph">
+<p>Now we can use of benefits new lombok annotations it provides.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__notnull">@NotNull</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One of great annotations to reduce boilerplate is to reduce null checks in every method that requires input that is not null.</p>
+</div>
+<div class="paragraph">
+<p>We can do it like this with lombok:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Person {
+    private String name;
+
+    public void setFirstNameLastName(@NonNull  String firstName, @NonNull String lastName ) {
+        this.name = firstName + " " + lastName;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now when we call the method with some of arguments <code>null</code> it will throw runtime exception with argument name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Exception in thread "main" java.lang.NullPointerException: firstName
+at com.ovo.domain.Person.setFirstNameLastName(Person.java:13)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We don&#8217;t have to mess with null checks. Code can be clean and we reduce possibility to introduce bug in out null checks. There are other options in java how to do the same but lombok does it in nice and clean way.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__data_and_related">@Data and related</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When we annotate class with <code>@Data</code> annotation it effectively adds other lombok annotations:  <code>@Getter</code>, <code>@Setter</code>, <code>@ToString</code>, <code>@EqualsAndHashCode</code> and <code>@RequiredArgsConstructor</code>.
+Basically it enables you to write java classes with fields only and getters and setters for all fields, <code>toString()</code>, <code>equals()</code> and <code>hashCode()</code> methods are automatically generated.</p>
+</div>
+<div class="paragraph">
+<p>Consider this class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Data
+public class Person {
+    private final Long id;
+    private String name;
+    private Person manager;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Due to <code>@RequiredArgsConstructor</code> all <code>final</code> fields are part of constructor so you will crate instance with <code>id</code> argument like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Person joe = new Person(456L);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then we have setters for <code>name</code> and <code>manager</code> fields:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">joe.setName("joe");
+joe.setManager(manager);
+System.out.println(joe);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally we have <code>toString()</code> that will produce by default this output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Person(id=456, name=joe, manager=Person(id=123, name=boss, manager=null))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also we have implementation of <code>equals()</code> and <code>hashCode()</code> using all fields.</p>
+</div>
+<div class="paragraph">
+<p>If we are not happy what fields got included into previously mentioned generated methods lombok has configuration options to exclude unwanted fields and further control behaviour.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="__builder">@Builder</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another great feature is possibility of creating builders with <a href="https://en.wikipedia.org/wiki/Fluent_interface">fluent interface</a>.</p>
+</div>
+<div class="paragraph">
+<p>We just annotate our pojo class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Data
+@Builder
+public class Team {
+    private String name;
+    @Singular private List&lt;Person&gt; members;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then we can build our instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Team team = Team.builder().name("A Team").member(new Person(1L)).member(new Person(2L)).build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is one special annotation - <code>@Singular</code> that enables adding entries to collection by subsequent calls to the same method. Nice :)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logging">Logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lombok also provides shorthand annotations for defining static loggers in class by family of annotations <code>@Log</code>, <code>@Slf4j</code> and others depending on logging implementation to be used. The benefit there is not so huge but it lets you to replace one line with another and you don&#8217;t have to worry about how exacly is static logger created.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lombok is nice library and it is worth using even when you use only one annotation from it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Offical pages - <a href="https://projectlombok.org" class="bare">https://projectlombok.org</a></p>
+</li>
+<li>
+<p>Sample app showing usage - <a href="https://github.com/ovo-6/samples/tree/master/lombok" class="bare">https://github.com/ovo-6/samples/tree/master/lombok</a></p>
+</li>
+<li>
+<p>IntelliJ IDEA plugin - <a href="https://plugins.jetbrains.com/idea/plugin/6317-lombok-plugin" class="bare">https://plugins.jetbrains.com/idea/plugin/6317-lombok-plugin</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>]]></description><link>https://ovo-6.github.io/2017/02/20/Lombok.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/02/20/Lombok.html</guid><category><![CDATA[java]]></category><category><![CDATA[ lombok]]></category><pubDate>Mon, 20 Feb 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[React]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>React is library from Facebook that enables building component based UI. From the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> it represents View only. The name may suggest it has something to do with <a href="http://www.reactivemanifesto.org/">reactive programming</a> but it has nothing to do with it.</p>
