@@ -39,9 +39,7 @@ Now when we call the method with some of arguments `null` it will throw runtime 
 Exception in thread "main" java.lang.NullPointerException: firstName
 at com.ovo.domain.Person.setFirstNameLastName(Person.java:13)
 ----
-We don't have to mess with null checks. Code can be clean and we reduce possibility to introduce bug in out null checks.
-
-TODO - other options
+We don't have to mess with null checks. Code can be clean and we reduce possibility to introduce bug in out null checks. There are other options in java how to do the same but lombok does it in nice and clean way.
 
 == @Data and related
 When we annotate class with `@Data` annotation it effectively adds other lombok annotations:  `@Getter`, `@Setter`, `@ToString`, `@EqualsAndHashCode` and `@RequiredArgsConstructor`.
@@ -82,8 +80,24 @@ If we are not happy what fields got included into previously mentioned generated
 
 
 == @Builder
+Another great feature is possibility of creating builders with https://en.wikipedia.org/wiki/Fluent_interface[fluent interface].
 
-
+We just annotate our pojo class:
+[source,java]
+----
+@Data
+@Builder
+public class Team {
+    private String name;
+    @Singular private List<Person> members;
+}
+----
+And then we can build our instance:
+[source,java]
+----
+Team team = Team.builder().name("A Team").member(new Person(1L)).member(new Person(2L)).build();
+----
+There is one special annotation - `@Singular` that enables adding entries to collection by subsequent calls to the same method. Nice :)
 
 == Logging
 
