@@ -32,6 +32,29 @@ We also need to include our H2 dependency in pom.xml:
 </dependency>
 ----
 
+The test would look like this:
+[source,java]
+----
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+public class RestLoginTest {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void testAdmin() {
+        AccountCredentials admin = new AccountCredentials();
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+
+        ResponseEntity<String> response = this.restTemplate.postForEntity("/login", admin, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+}
+----
+
 Example code can be seen in this test: https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/integration/RestLoginTest.java
 
 == Conclusion
