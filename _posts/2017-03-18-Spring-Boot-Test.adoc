@@ -2,4 +2,8 @@
 :hp-tags: java, spring, spring boot, testing
 
 
+When we start to explore Spring Boot we cannot leave behind test features of Spring Boot application.
+Because Spring Boot is embedded with web server we can leverage that in integration testing.
 
+
+We annotate our test with `@RunWith(SpringRunner.class)` and `@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)` annotations. It will start 
