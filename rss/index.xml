@@ -1,4 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 20 Feb 2017 14:24:55 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Lombok]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 18 Mar 2017 20:03:42 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Spring Boot Test]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>When we start to explore Spring Boot we cannot leave behind test features of Spring Boot application.
+Because Spring Boot is embedded with web server we can leverage that in integration testing.</p>
+</div>
+<div class="paragraph">
+<p>First we need to include support for test in pom.xml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then we annotate our test with <code>@RunWith(SpringRunner.class)</code> and <code>@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)</code> annotations. It will start embedded tomcat on random port to avoid collision with other service and run tests.</p>
+</div>
+<div class="paragraph">
+<p>For our integration testing of REST API we can use <code>TestRestTemplate</code> bean that will connect to the right port of Spring Boot application started before tests. Then you can test functionality by verifying HTTP responses.</p>
+</div>
+<div class="paragraph">
+<p>When using JPA ORM provider like Hibernate we can use in-memory database for tests by using  <code>@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)</code> annotation. This way we speed up tests and we won&#8217;t overwrite our production database.</p>
+</div>
+<div class="paragraph">
+<p>We also need to include our H2 dependency in pom.xml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+   &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+   &lt;artifactId&gt;h2&lt;/artifactId&gt;
+   &lt;version&gt;1.4.191&lt;/version&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The test would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+public class RestLoginTest {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void testAdmin() {
+        AccountCredentials admin = new AccountCredentials();
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+
+        ResponseEntity&lt;String&gt; response = this.restTemplate.postForEntity("/login", admin, String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example code can be seen in this test: <a href="https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/integration/RestLoginTest.java" class="bare">https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/integration/RestLoginTest.java</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Boot Test module provides nice features that simplifies testing of spring boot application and I found it very useful.</p>
+</div>
+</div>
+</div>]]></description><link>https://ovo-6.github.io/2017/03/18/Spring-Boot-Test.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/03/18/Spring-Boot-Test.html</guid><category><![CDATA[java]]></category><category><![CDATA[ spring]]></category><category><![CDATA[ spring boot]]></category><category><![CDATA[ testing]]></category><pubDate>Sat, 18 Mar 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Lombok]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>There are not many java libraries that would elegantly solve some major shortcomings of java programs, but <a href="https://projectlombok.org">project lombok</a> is one of them.</p>
