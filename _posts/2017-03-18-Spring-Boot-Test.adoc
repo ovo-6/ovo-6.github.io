@@ -5,5 +5,34 @@
 When we start to explore Spring Boot we cannot leave behind test features of Spring Boot application.
 Because Spring Boot is embedded with web server we can leverage that in integration testing.
 
+First we need to include support for test in pom.xml:
+[source,xml]
+----
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-test</artifactId>
+   <scope>test</scope>
+</dependency>
+----
 
-We annotate our test with `@RunWith(SpringRunner.class)` and `@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)` annotations. It will start 
+Then we annotate our test with `@RunWith(SpringRunner.class)` and `@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)` annotations. It will start embedded tomcat on random port to avoid collision with other service and run tests.
+
+For our integration testing of REST API we can use `TestRestTemplate` bean that will connect to the right port of Spring Boot application started before tests. Then you can test functionality by verifying HTTP responses.
+
+When using JPA ORM provider like Hibernate we can use in-memory database for tests by using  `@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)` annotation. This way we speed up tests and we won't overwrite our production database.
+
+We also need to include our H2 dependency in pom.xml:
+[source,xml]
+----
+<dependency>
+   <groupId>com.h2database</groupId>
+   <artifactId>h2</artifactId>
+   <version>1.4.191</version>
+   <scope>test</scope>
+</dependency>
+----
+
+Example code can be seen in this test: https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/integration/RestLoginTest.java
+
+== Conclusion
+Spring Boot Test module provides nice features that simplifies testing of spring boot application and I found it very useful.
