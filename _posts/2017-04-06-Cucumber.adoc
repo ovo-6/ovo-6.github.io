@@ -1,0 +1,17 @@
+= Cucumber
+:hp-tags: java, testing
+
+Cucumber is tool for capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner.
+
+Basically someone (e.g. product owner) defines requirements in specific areas of functionality in plain english sentences. This is example:
+
+[source,txt]
+----
+Scenario: Invalid login
+  When admin logs in with password invalid
+  Then the server should handle it and return a UNAUTHORIZED status
+----
+
+Then someone else (e.g. developer) will implement code behind these sentences that will call actual implementation to prove it is really implemented.
+
+
