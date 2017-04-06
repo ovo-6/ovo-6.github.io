@@ -17,23 +17,23 @@ Then someone else (e.g. developer) will implement code behind these sentences th
 In our test we will use `@When` annotation with regural expression to parse the string with condition.
 [source,java]
 ----
-	@When("^(.*) logs in with password (.*)$")
-    public void login(String username, String password) throws Throwable {
-        AccountCredentials admin = new AccountCredentials();
-        admin.setUsername(username);
-        admin.setPassword(password);
-        response = this.restTemplate.postForEntity("/login", admin, String.class);
-    }
+@When("^(.*) logs in with password (.*)$")
+public void login(String username, String password) throws Throwable {
+   AccountCredentials admin = new AccountCredentials();
+   admin.setUsername(username);
+   admin.setPassword(password);
+   response = this.restTemplate.postForEntity("/login", admin, String.class);
+}
 ----
 
 This code will create http post request for login with user and password to login endpoint. The response is saved to field that is used later in `@Then` statement:
 
 [source,java]
 ----
-    @Then("^no auth token should be returned$")
-    public void no_auth_token_should_be_returned() throws Throwable {
-        assertThat(response.getHeaders().get("Authorization")).isNullOrEmpty();
-    }
+@Then("^no auth token should be returned$")
+public void no_auth_token_should_be_returned() throws Throwable {
+   assertThat(response.getHeaders().get("Authorization")).isNullOrEmpty();
+}
 ----
 
 This part only validates requirement written in sentence by checking response saved in field.
