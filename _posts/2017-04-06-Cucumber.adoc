@@ -38,7 +38,7 @@ public void no_auth_token_should_be_returned() throws Throwable {
 
 This part only validates requirement written in sentence by checking response saved in field.
 
-We can also add multiple statements by 'And` keyword to create more complex requirements.
+We can also add multiple statements by `And` keyword to create more complex requirements.
 
 Example of working test in conjunction with spring boot test can be seen here:
 https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/acceptance/StepDefs.java
