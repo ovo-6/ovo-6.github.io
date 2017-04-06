@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 18 Mar 2017 20:03:42 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Spring Boot Test]]></title><description><![CDATA[<div id="preamble">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ovo6 blog]]></title><description><![CDATA[my own blog]]></description><link>https://ovo-6.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 06 Apr 2017 19:38:58 GMT</lastBuildDate><atom:link href="https://ovo-6.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Cucumber]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cucumber is tool for creating acceptance tests by capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner.</p>
+</div>
+<div class="paragraph">
+<p>Basically someone (e.g. product owner) defines requirements in specific areas of functionality in plain english sentences. This is example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Scenario: Invalid login
+  When admin logs in with password invalid
+  Then the server should handle it and return a UNAUTHORIZED status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then someone else (e.g. developer) will implement code behind these sentences that will call actual implementation to prove it is really implemented.</p>
+</div>
+<div class="paragraph">
+<p>In our test we will use <code>@When</code> annotation with regural expression to parse the string with condition.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@When("^(.*) logs in with password (.*)$")
+public void login(String username, String password) throws Throwable {
+   AccountCredentials admin = new AccountCredentials();
+   admin.setUsername(username);
+   admin.setPassword(password);
+   response = this.restTemplate.postForEntity("/login", admin, String.class);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This code will create http post request for login with user and password to login endpoint. The response is saved to field that is used later in <code>@Then</code> statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Then("^no auth token should be returned$")
+public void no_auth_token_should_be_returned() throws Throwable {
+   assertThat(response.getHeaders().get("Authorization")).isNullOrEmpty();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This part only validates requirement written in sentence by checking response saved in field.</p>
+</div>
+<div class="paragraph">
+<p>We can also add multiple statements by <code>And</code> keyword to create more complex requirements.</p>
+</div>
+<div class="paragraph">
+<p>Example of working test in conjunction with spring boot test can be seen here:
+<a href="https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/acceptance/StepDefs.java" class="bare">https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/acceptance/StepDefs.java</a></p>
+</div>
+<div class="paragraph">
+<p>Tests definitions file:
+<a href="https://github.com/ovo-6/samples/blob/master/expenses/src/test/resources/cucumber/login.feature" class="bare">https://github.com/ovo-6/samples/blob/master/expenses/src/test/resources/cucumber/login.feature</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cucumber provides benefit of formalizing acceptance tests. On the other hand in more complex scenarios it may impose difficulties by creating such automated tests. Also the value of those tests is questionable when we have functionality covered by unit tests it may be seen as double investment.</p>
+</div>
+</div>
+</div>]]></description><link>https://ovo-6.github.io/2017/04/06/Cucumber.html</link><guid isPermaLink="true">https://ovo-6.github.io/2017/04/06/Cucumber.html</guid><category><![CDATA[java]]></category><category><![CDATA[ testing]]></category><pubDate>Thu, 06 Apr 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Spring Boot Test]]></title><description><![CDATA[<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>When we start to explore Spring Boot we cannot leave behind test features of Spring Boot application.
