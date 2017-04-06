@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Cucumber - ovo6 blog</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cucumber">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cucumber">
+    <meta property="og:description" content="">
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link rel="stylesheet" type="text/css" href="//ovo-6.github.io/themes/uno/assets/css/uno.css?v=1491507538688" />
+
+    <link rel="canonical" href="https://ovo-6.github.io/2017/04/06/Cucumber.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="ovo6 blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cucumber" />
+    <meta property="og:description" content="Cucumber is tool for creating acceptance tests by capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner. Basically someone (e.g. product owner) defines requirements in specific areas of functionality in plain english sentences. This is example: Scenario: Invalid login   When" />
+    <meta property="og:url" content="https://ovo-6.github.io/2017/04/06/Cucumber.html" />
+    <meta property="article:tag" content="java" />
+    <meta property="article:tag" content=" testing" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Cucumber" />
+    <meta name="twitter:description" content="Cucumber is tool for creating acceptance tests by capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner. Basically someone (e.g. product owner) defines requirements in specific areas of functionality in plain english sentences. This is example: Scenario: Invalid login   When" />
+    <meta name="twitter:url" content="https://ovo-6.github.io/2017/04/06/Cucumber.html" />
+    
+    <script type="application/ld+json">
+null
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="ovo6 blog" href="https://ovo-6.github.io/rss/" />
+
+</head>
+<body class="post-template tag-java tag-testing no-js">
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    <header class="panel-cover panel-cover--collapsed " >
+      <div class="panel-main">
+    
+        <div class="panel-main__inner panel-inverted">
+        <div class="panel-main__content">
+    
+            <h1 class="panel-cover__title panel-title"><a href="https://ovo-6.github.io" title="link to homepage for ovo6 blog">ovo6 blog</a></h1>
+            <hr class="panel-cover__divider" />
+            <p class="panel-cover__description">my own blog</p>
+            <hr class="panel-cover__divider panel-cover__divider--secondary" />
+    
+            <div class="navigation-wrapper">
+    
+              <nav class="cover-navigation cover-navigation--primary">
+                <ul class="navigation">
+                  <li class="navigation__item"><a href="https://ovo-6.github.io/#blog" title="link to ovo6 blog blog" class="blog-button">Blog</a></li>
+                </ul>
+              </nav>
+    
+              
+              
+              <nav class="cover-navigation navigation--social">
+                <ul class="navigation">
+              
+              
+                  <!-- Twitter -->
+                  <li class="navigation__item">
+                    <a href="ovo6" title="Twitter account">
+                      <i class='icon icon-social-twitter'></i>
+                      <span class="label">Twitter</span>
+                    </a>
+                  </li>
+              
+              
+              
+              
+              
+              
+              
+              
+                </ul>
+              </nav>
+              
+    
+            </div>
+    
+          </div>
+    
+        </div>
+    
+        <div class="panel-cover--overlay"></div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            
+
+  <article class="post-container post-container--single">
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime="06 Apr 2017" class="post-meta__date date">06 Apr 2017</time> &#8226; <span class="post-meta__tags tags">on <a href="https://ovo-6.github.io/tag/java/">java</a>, <a href="https://ovo-6.github.io/tag/testing/"> testing</a></span>
+        <span class="post-meta__author author"><img src="https://avatars1.githubusercontent.com/u/10128927?v&#x3D;3" alt="profile image for ovo-6" class="avatar post-meta__avatar" /> by ovo-6</span>
+      </div>
+      <h1 class="post-title">Cucumber</h1>
+    </header>
+
+    <section class="post tag-java tag-testing">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cucumber is tool for creating acceptance tests by capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner.</p>
+</div>
+<div class="paragraph">
+<p>Basically someone (e.g. product owner) defines requirements in specific areas of functionality in plain english sentences. This is example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Scenario: Invalid login
+  When admin logs in with password invalid
+  Then the server should handle it and return a UNAUTHORIZED status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then someone else (e.g. developer) will implement code behind these sentences that will call actual implementation to prove it is really implemented.</p>
+</div>
+<div class="paragraph">
+<p>In our test we will use <code>@When</code> annotation with regural expression to parse the string with condition.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@When("^(.*) logs in with password (.*)$")
+public void login(String username, String password) throws Throwable {
+   AccountCredentials admin = new AccountCredentials();
+   admin.setUsername(username);
+   admin.setPassword(password);
+   response = this.restTemplate.postForEntity("/login", admin, String.class);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This code will create http post request for login with user and password to login endpoint. The response is saved to field that is used later in <code>@Then</code> statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Then("^no auth token should be returned$")
+public void no_auth_token_should_be_returned() throws Throwable {
+   assertThat(response.getHeaders().get("Authorization")).isNullOrEmpty();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This part only validates requirement written in sentence by checking response saved in field.</p>
+</div>
+<div class="paragraph">
+<p>We can also add multiple statements by <code>And</code> keyword to create more complex requirements.</p>
+</div>
+<div class="paragraph">
+<p>Example of working test in conjunction with spring boot test can be seen here:
+<a href="https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/acceptance/StepDefs.java" class="bare">https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/acceptance/StepDefs.java</a></p>
+</div>
+<div class="paragraph">
+<p>Tests definitions file:
+<a href="https://github.com/ovo-6/samples/blob/master/expenses/src/test/resources/cucumber/login.feature" class="bare">https://github.com/ovo-6/samples/blob/master/expenses/src/test/resources/cucumber/login.feature</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cucumber provides benefit of formalizing acceptance tests. On the other hand in more complex scenarios it may impose difficulties by creating such automated tests. Also the value of those tests is questionable when we have functionality covered by unit tests it may be seen as double investment.</p>
+</div>
+</div>
+</div>
+    </section>
+
+  </article>
+
+  
+  <section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'ovo6'; // required: replace example with your forum shortname
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+  
+
+
+
+            <footer class="footer">
+                <span class="footer__copyright">&copy; 2017. All rights reserved.</span>
+                <span class="footer__copyright"><a href="http://uno.daleanthony.com" title="link to page for Uno Ghost theme">Uno theme</a> by <a href="http://daleanthony.com" title="link to website for Dale-Anthony">Dale-Anthony</a></span>
+                <span class="footer__copyright">Proudly published with <a href="http://hubpress.io" title="link to Hubpress website">Hubpress</a></span>
+            </footer>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+
+    <script type="text/javascript" src="//ovo-6.github.io/themes/uno/assets/js/main.js?v=1491507538688"></script>
+    
+
+</body>
+</html>
