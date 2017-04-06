@@ -1,7 +1,7 @@
 = Cucumber
 :hp-tags: java, testing
 
-Cucumber is tool for capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner.
+Cucumber is tool for creating acceptance tests by capturing requirements for system to be implemented and also for tracking the state of implementation in automated manner.
 
 Basically someone (e.g. product owner) defines requirements in specific areas of functionality in plain english sentences. This is example:
 
@@ -36,5 +36,15 @@ This code will create http post request for login with user and password to logi
     }
 ----
 
-This part only validates requirement in sentence by checking response in field.
+This part only validates requirement written in sentence by checking response saved in field.
 
+We can also add multiple statements by 'And` keyword to create more complex requirements.
+
+Example of working test in conjunction with spring boot test can be seen here:
+https://github.com/ovo-6/samples/blob/master/expenses/src/test/java/com/ovo6/expenses/acceptance/StepDefs.java
+
+Tests definitions file:
+https://github.com/ovo-6/samples/blob/master/expenses/src/test/resources/cucumber/login.feature
+
+== Conclusion
+Cucumber provides benefit of formalizing acceptance tests. On the other hand in more complex scenarios it may impose difficulties by creating such automated tests. Also the value of those tests is questionable when we have functionality covered by unit tests it may be seen as double investment.
